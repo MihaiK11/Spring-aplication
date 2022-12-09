@@ -1,9 +1,12 @@
 package com.example.spring_aplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,5 +19,9 @@ public class User {
     private long id;
     private String username;
     private String password;
+
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Store> stores = new ArrayList<>();
 
 }

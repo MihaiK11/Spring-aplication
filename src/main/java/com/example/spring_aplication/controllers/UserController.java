@@ -15,16 +15,15 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     @GetMapping()
-    public List<User> getAllUsers(@PathParam("name") String name){
-        return userRepository.getAllByUsername(name);
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
     }
 
     @PostMapping()
-    public void createUser(@RequestBody List<User> user){
-        userRepository.saveAll(user);
+    public void createUser(@RequestBody User user){
+        userRepository.save(user);
     }
 
-//    @PostMapping("/{id}")
 //    public UserContainer testPost(@RequestBody User user,@PathVariable("id") int id,@RequestParam int serialNumber){
 //        final UserContainer userContainer = new UserContainer();
 //        userContainer.setUser(user);

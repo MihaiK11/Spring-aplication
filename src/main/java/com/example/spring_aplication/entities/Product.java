@@ -1,6 +1,7 @@
-package com.example.demo.entities;
+package com.example.spring_aplication.entities;
 
 import com.example.spring_aplication.entities.Store;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,18 @@ public class Product {
     @SequenceGenerator(name = "userGenerator", sequenceName = "seq")
     private long id;
 
+    @Column(name = "NAME")
+    private String name;
+
+    @ManyToMany(targetEntity = Store.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "store_product",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "store_id")
+    )
+    @JsonBackReference
     private List<Store> stores;
 
 }
